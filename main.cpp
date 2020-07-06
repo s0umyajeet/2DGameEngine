@@ -1,12 +1,22 @@
 #include <iostream>
+#include <string>
 #include "SDL.h"
+#include "Game.h"
+
+Game* game = NULL;
 
 int main(int argc, char* argv[]) {
-	if (SDL_Init(SDL_INIT_EVERYTHING) >= 0) {
-		std::cout << "All subsystems initialized successfully..." << std::endl;
-	} else {
-		std::cout << "Error initializing subsystems..." << std::endl;
-		std::cout << "Error: " << SDL_GetError() << std::endl;
-	}
+	game = new Game();
+	bool fullscreen = false;
+	
+	game->init("Game 1", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 480, 480, fullscreen);
+
+	while (game->isRunning()) {
+		game->handleEvents();
+		game->update();
+		game->render();
+	} 
+	game->clean();
+	delete game;
 	return 0;
 }
