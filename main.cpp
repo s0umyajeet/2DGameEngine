@@ -1,12 +1,12 @@
 #include <iostream>
 #include <string>
 #include "SDL.h"
-#include "Game.h"
+#include "Engine.h"
 
-Game* game = NULL;
+Engine* game = NULL;
 
 int main(int argc, char* argv[]) {
-	game = new Game();
+	game = new Engine();
 	bool fullscreen = false;
 	
 	game->init("Game 1", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 480, 480, fullscreen);
