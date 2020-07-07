@@ -1,0 +1,24 @@
+#pragma once
+#include "SDL.h"
+
+class Engine {
+public:
+	Engine();
+	~Engine();
+	bool init(const char* title, int x_pos, int y_pos, int width, int height, bool fullscreen);
+	void update();
+	void render();
+	void handleEvents();
+	inline bool isRunning() { return this->_is_running; }
+	void clean();
+
+private:
+	SDL_Window*	_window;
+	SDL_Surface*	_surface;
+	SDL_Texture*	_texture;
+	SDL_Renderer*	_renderer;
+	SDL_Rect        _source_rect;
+	SDL_Rect        _dest_rect;
+	bool		_is_running;
+
+};
