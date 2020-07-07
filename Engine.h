@@ -1,10 +1,9 @@
 #pragma once
 #include "SDL.h"
-
+ 
 class Engine {
 public:
-	Engine();
-	~Engine();
+	static Engine& getInstance();
 	bool init(const char* title, int x_pos, int y_pos, int width, int height, bool fullscreen);
 	void update();
 	void render();
@@ -13,6 +12,9 @@ public:
 	void clean();
 
 private:
+	Engine();
+	~Engine();
+	
 	SDL_Window*	_window;
 	SDL_Surface*	_surface;
 	SDL_Texture*	_texture;
