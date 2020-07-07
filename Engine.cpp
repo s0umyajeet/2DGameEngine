@@ -1,10 +1,10 @@
 #include <iostream>
-#include "Game.h"
+#include "Engine.h"
 #include <string>
 #include <Windows.h>
 #include <SDL_image.h>
 
-Game::Game() { 
+Engine::Engine() { 
 	_is_running	= true; 
 	_window		= NULL;
 	_surface	= NULL;
@@ -12,9 +12,9 @@ Game::Game() {
 	_renderer	= NULL;
 }
 
-Game::~Game() {}
+Engine::~Engine() {}
 
-bool Game::init(const char* title, int x_pos, int y_pos, int width, int height, bool fullscreen) {
+bool Engine::init(const char* title, int x_pos, int y_pos, int width, int height, bool fullscreen) {
 	Uint32 flags = 0;
 	time_t curr_time = NULL;
 	std::string image_path = "assets/doggo/doggo.png";
@@ -74,7 +74,7 @@ bool Game::init(const char* title, int x_pos, int y_pos, int width, int height, 
 }
 
 
-void Game::update() 
+void Engine::update() 
 {
 	int frames = 6;
 	int delay_per_frame = 80		;    //ms;
@@ -83,7 +83,7 @@ void Game::update()
 	_source_rect.x = _source_rect.w * current_frame;
 }
 
-void Game::render()
+void Engine::render()
 {
 	//clear the renderer
 	SDL_RenderClear(_renderer);
@@ -93,7 +93,7 @@ void Game::render()
 
 }
 
-void Game::handleEvents()
+void Engine::handleEvents()
 {
 	SDL_Event event;
 	while (SDL_PollEvent(&event)) {
@@ -106,7 +106,7 @@ void Game::handleEvents()
 	}	
 }
 
-void Game::clean()
+void Engine::clean()
 {
 	std::cout << "Cleaning game..." << std::endl;
 	SDL_DestroyWindow(_window);
