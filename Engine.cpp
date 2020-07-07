@@ -14,6 +14,12 @@ Engine::Engine() {
 
 Engine::~Engine() {}
 
+Engine& Engine::getInstance()
+{
+	static Engine _engine;
+	return _engine;
+}
+
 bool Engine::init(const char* title, int x_pos, int y_pos, int width, int height, bool fullscreen) {
 	Uint32 flags = 0;
 	time_t curr_time = NULL;

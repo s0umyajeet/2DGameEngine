@@ -3,20 +3,15 @@
 #include "SDL.h"
 #include "Engine.h"
 
-Engine* game = NULL;
 
 int main(int argc, char* argv[]) {
-	game = new Engine();
 	bool fullscreen = false;
-	
-	game->init("Game 1", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 480, 480, fullscreen);
-
-	while (game->isRunning()) {
-		game->handleEvents();
-		game->update();
-		game->render();
+	Engine::getInstance().init("Game 1", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 480, 480, fullscreen);
+	while (Engine::getInstance().isRunning()) {
+		Engine::getInstance().handleEvents();
+		Engine::getInstance().update();
+		Engine::getInstance().render();
 	} 
-	game->clean();
-	delete game;
+	Engine::getInstance().clean();
 	return 0;
 }
