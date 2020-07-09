@@ -3,6 +3,7 @@
 #include <string>
 #include <Windows.h>
 #include <SDL_image.h>
+#include "TextureManager.h"
 
 Engine::Engine() { 
 	_is_running	= true; 
@@ -48,7 +49,11 @@ bool Engine::init(const char* title, int x_pos, int y_pos, int width, int height
 			std::cout << "Window created successfully... " << std::endl;
 			if (_renderer = SDL_CreateRenderer(_window, -1, 0)) {	
 				std::cout << "Renderer created successfully... " << std::endl;
-				//SDL_SetRenderDrawColor(_renderer, 255, 255, 255, 255);
+				
+				if (TextureManager::getInstance().load("doggo", image_path)) {
+					std::cout << "Image loading successful..." << std::endl;
+				}
+				
 				if(_surface = IMG_Load(image_path.c_str())) { 
 					std::cout << "Image loaded on surface successfully... " << std::endl;
 					
