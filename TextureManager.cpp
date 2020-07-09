@@ -13,18 +13,23 @@ bool TextureManager::load(std::string id, std::string file_name)
 	}
 
 	SDL_Texture* temp_texture = SDL_CreateTextureFromSurface(Engine::getInstance().getRenderer(), temp_surface);
+	SDL_FreeSurface(temp_surface);
 
 	if (temp_texture == NULL) {
 		std::cout << "Texture creation failed(temp_texture)..." << SDL_GetError() << std::endl;
 		return false;
 	} else {
 		_texture_map[id] = temp_texture;
+		SDL_DestroyTexture(temp_texture);
 		return true;
 	}
 }
 
 void TextureManager::drop(std::string id)
 {
+	SDL_DestroyTexture(_texture_map[id]);
+	_texture_map.erase(id);
+	std::cout << "Texture with id: " << id << " removed from texture map successfully..." << std::endl;
 }
 
 bool TextureManager::draw(std::string id, SDL_Renderer* _renderer, int x, int y, int width, int height, SDL_RendererFlip flip)
