@@ -20,6 +20,11 @@ Engine& Engine::getInstance()
 	return _engine;
 }
 
+SDL_Renderer* Engine::getRenderer()
+{
+	return this->_renderer;
+}
+
 bool Engine::init(const char* title, int x_pos, int y_pos, int width, int height, bool fullscreen) {
 	Uint32 flags = 0;
 	time_t curr_time = NULL;

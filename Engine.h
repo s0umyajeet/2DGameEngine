@@ -4,6 +4,7 @@
 class Engine {
 public:
 	static Engine& getInstance();
+	SDL_Renderer* getRenderer();
 	bool init(const char* title, int x_pos, int y_pos, int width, int height, bool fullscreen);
 	void update();
 	void render();
