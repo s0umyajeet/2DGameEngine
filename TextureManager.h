@@ -7,7 +7,7 @@ class TextureManager
 {
 public:
 	static TextureManager& getInstance();
-	bool load(std::string id, std::string fileName);    
+	bool load(std::string id, std::string fileName);  
 	void drop(std::string id);
 	bool draw(std::string id, SDL_Renderer* _renderer, int x, int y, int width, int height, SDL_RendererFlip flip);
 	bool draw_frame(std::string id, SDL_Renderer* _renderer, int x, int y, int width, int height, int current_frame, int current_row, SDL_RendererFlip flip);
@@ -17,7 +17,7 @@ private:
 	TextureManager();
 	~TextureManager();
 	
-	std::map < std::string, SDL_Texture*> _texture_map;
+	std::map <std::string, SDL_Texture*> _texture_map;
 
 };
 
