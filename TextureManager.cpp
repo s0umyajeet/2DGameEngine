@@ -43,15 +43,13 @@ bool TextureManager::draw(std::string id, SDL_Renderer* _renderer, int x, int y,
 	if (_renderer == NULL) {
 		std::cout << "Error empty renderer/renderer pointing to NULL passed...";
 		return false;
-	}
-	else {
+	} else {
 		SDL_Rect src_rect = { 0, 0, width, height };
 		SDL_Rect dest_rect = { x, y, width, height };
 
 		if (SDL_RenderCopyEx(_renderer, _texture_map[id], &src_rect, &dest_rect, 0, 0, flip) == 0) {
 			std::cout << "RenderCopyEx success..." << std::endl;
 			return true;
-
 		} else {
 			std::cout << "Failure in RenderCopyEx. String id: " << id << " Error: " << SDL_GetError() << std::endl;
 			return false;
@@ -61,6 +59,19 @@ bool TextureManager::draw(std::string id, SDL_Renderer* _renderer, int x, int y,
 
 bool TextureManager::draw_frame(std::string id, SDL_Renderer* _renderer, int x, int y, int width, int height, int current_frame, int current_row, SDL_RendererFlip flip)
 {
+	SDL_Rect src_rect;
+	SDL_Rect dest_rect;
+
+	src_rect.x = width * current_frame;
+	src_rect.y = height * (current_row - 1);
+
+	src_rect.w = dest_rect.w = width;
+	src_rect.h = dest_rect.h = height;
+
+	dest_rect.x = x;
+	dest_rect.y = y;
+
+	SDL_RenderCopyEx(_renderer, _texture_map[id], &src_rect, &dest_rect, 0, 0, flip);
 	return false;
 }
 
