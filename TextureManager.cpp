@@ -77,5 +77,9 @@ bool TextureManager::draw_frame(std::string id, SDL_Renderer* _renderer, int x, 
 
 void TextureManager::clean()
 {
-
+	for (auto itr = _texture_map.begin(); itr != _texture_map.end(); itr++) {
+		SDL_DestroyTexture(itr->second);
+	}
+	_texture_map.clear();
+	std::cout << "Texture map cleared successfully..." << std::endl;
 }
