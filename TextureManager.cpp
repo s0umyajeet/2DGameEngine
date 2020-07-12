@@ -9,6 +9,9 @@ TextureManager& TextureManager::getInstance()
 	return instance;
 }
 
+TextureManager::TextureManager() {}
+TextureManager::~TextureManager() {}
+
 bool TextureManager::load(std::string id, std::string file_name)
 {
 	SDL_Surface *temp_surface = IMG_Load(file_name.c_str());
@@ -44,15 +47,27 @@ bool TextureManager::draw(std::string id, SDL_Renderer* _renderer, int x, int y,
 		std::cout << "Error empty renderer/renderer pointing to NULL passed...";
 		return false;
 	} else {
+ 
 		SDL_Rect src_rect = { 0, 0, width, height };
 		SDL_Rect dest_rect = { x, y, width, height };
 
-		if (SDL_RenderCopyEx(_renderer, _texture_map[id], &src_rect, &dest_rect, 0, 0, flip) == 0) {
-			std::cout << "RenderCopyEx success..." << std::endl;
-			return true;
+		if (width == 0 && height == 0) {
+			if (SDL_RenderCopyEx(_renderer, _texture_map[id], NULL, NULL, 0, 0, flip) == 0) {
+				std::cout << "RenderCopyEx success..." << std::endl;
+				return true;
+			} else {
+				std::cout << "RenderCopyEx failed... String id: " << id << " Error: " << SDL_GetError() << std::endl;
+			}
 		} else {
-			std::cout << "Failure in RenderCopyEx. String id: " << id << " Error: " << SDL_GetError() << std::endl;
-			return false;
+			if (SDL_RenderCopyEx(_renderer, _texture_map[id], &src_rect, &dest_rect, 0, 0, flip) >= 0) {
+				std::cout << "RenderCopyEx success..." << std::endl;
+				return true;
+			}
+			else {
+				std::cout << "Failure in RenderCopyEx() String id: " << id << " Error: " << SDL_GetError() << std::endl;
+				TextureManager::util_show_texture_map();
+				return false;
+			}
 		}
 	}
 }
@@ -73,6 +88,13 @@ bool TextureManager::draw_frame(std::string id, SDL_Renderer* _renderer, int x, 
 
 	SDL_RenderCopyEx(_renderer, _texture_map[id], &src_rect, &dest_rect, 0, 0, flip);
 	return false;
+}
+
+void TextureManager::util_show_texture_map()
+{
+	for (auto itr = _texture_map.begin(); itr != _texture_map.end(); itr++) {
+		std::cout << itr->first << " " << itr->second << std::endl;
+	}
 }
 
 void TextureManager::clean()
