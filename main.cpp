@@ -15,7 +15,9 @@ int main(int argc, char* argv[]) {
 		Engine::getInstance().update();
 		Engine::getInstance().render();
 	} 
+
 	Engine::getInstance().clean();
+	
 	return 0;
 }
 
