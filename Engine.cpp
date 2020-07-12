@@ -29,14 +29,14 @@ SDL_Renderer* Engine::getRenderer()
 bool Engine::init(const char* title, int x_pos, int y_pos, int width, int height, bool fullscreen) {
 	Uint32 flags = 0;
 	time_t curr_time = NULL;
-	std::string image_path = "assets/doggo/doggo.png";
+	std::string image_path = "assets/hills.jpg";
 
 	if (fullscreen) {
 		flags = SDL_WINDOW_FULLSCREEN;
 	}
 
 	if (SDL_Init(SDL_INIT_EVERYTHING) >= 0) {
-		std::cout << "All SDL subsystems initialized successfully... " <<  std::endl;
+		std::cout << "All SDL subsystems initialized successfully... " << std::endl;
 
 		if (IMG_Init(IMG_INIT_JPG | IMG_INIT_PNG) == (1 | 2)) {
 			std::cout << "SDL image subsystems initialized successfully..." << std::endl;
@@ -50,27 +50,12 @@ bool Engine::init(const char* title, int x_pos, int y_pos, int width, int height
 			if (_renderer = SDL_CreateRenderer(_window, -1, 0)) {	
 				std::cout << "Renderer created successfully... " << std::endl;
 				
-				if (TextureManager::getInstance().load("doggo", image_path)) {
+				if (TextureManager::getInstance().load("hills", image_path)) {
 					std::cout << "Image loading successful..." << std::endl;
-				}
-				
-				if(_surface = IMG_Load(image_path.c_str())) { 
-					std::cout << "Image loaded on surface successfully... " << std::endl;
-					
-					if (_texture = SDL_CreateTextureFromSurface(_renderer, _surface)) {
-						std::cout << "Texture created from surface successfully... " << std::endl;
-						SDL_FreeSurface(_surface);
-
-						SDL_QueryTexture(_texture, NULL, NULL, &_source_rect.w, &_source_rect.h);
-						_source_rect.w /= 6;       //sprite has 6 frames
-									
-					} else {
-						std::cout << "Texture creation failed... " << SDL_GetError() << std::endl;
-					}
 				} else {
-					std::cout << "Image loading failed... " <<  SDL_GetError() << std::endl;
-					return false;
+					std::cout << "Image loading failed..." << std::endl;
 				}
+
 			} else {
 				std::cout << "Renderer creation failed... " << SDL_GetError() << std::endl;
 				return false;
@@ -83,6 +68,7 @@ bool Engine::init(const char* title, int x_pos, int y_pos, int width, int height
 		std::cout << "Error initializing subsystems... " << SDL_GetError() << std::endl;
 		return false;
 	}
+
 	std::cout << "Init successful..." << std::endl;
 	//Everything initialized successully, start the main loop
 	_is_running = true;    
@@ -92,19 +78,21 @@ bool Engine::init(const char* title, int x_pos, int y_pos, int width, int height
 
 void Engine::update() 
 {
-	int frames = 6;
-	int delay_per_frame = 80		;    //ms;
-	int current_frame = (SDL_GetTicks() / delay_per_frame) % frames;
+	//int frames = 6;
+	//int delay_per_frame = 80;    //ms;
+	//int current_frame = (SDL_GetTicks() / delay_per_frame) % frames;
 
-	_source_rect.x = _source_rect.w * current_frame;
+	//_source_rect.x = _source_rect.w * current_frame;
 }
+
 
 void Engine::render()
 {
 	//clear the renderer
 	SDL_RenderClear(_renderer);
 	//draw to the screen
-	SDL_RenderCopy(_renderer, _texture, &_source_rect, NULL);
+	TextureManager::getInstance().draw("hills", _renderer, 0, 0, 0, 0, SDL_FLIP_NONE);
+	//SDL_RenderCopy(_renderer, _texture, &_source_rect, NULL);
 	SDL_RenderPresent(_renderer);
 
 }
