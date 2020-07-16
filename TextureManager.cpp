@@ -29,7 +29,7 @@ bool TextureManager::load(std::string id, std::string file_name)
 		return false;
 	} else {
 		_texture_map[id] = temp_texture;
-		SDL_DestroyTexture(temp_texture);
+		//SDL_DestroyTexture(temp_texture);
 		return true;
 	}
 }
