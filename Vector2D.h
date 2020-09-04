@@ -7,7 +7,7 @@ public:
 	float y;
 
 	//constructor
-	Vector2D(int X, int Y) : x(X), y(Y) {}	
+	Vector2D(int X = 0, int Y = 0) : x(X), y(Y) {}	
 	
 	//+ operator overload
 	inline Vector2D operator+(const Vector2D& v) {
@@ -23,4 +23,3 @@ public:
 		std::cout << "(" << x << "i + " << y << "j)" << std::endl;
 	}
 };
-
