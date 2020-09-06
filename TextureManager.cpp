@@ -77,14 +77,9 @@ bool TextureManager::draw_frame(std::string id, SDL_Renderer* _renderer, int x, 
 	SDL_Rect src_rect;
 	SDL_Rect dest_rect;
 
-	src_rect.x = width * current_frame;
-	src_rect.y = height * (current_row - 1);
-
-	src_rect.w = dest_rect.w = width;
-	src_rect.h = dest_rect.h = height;
-
-	dest_rect.x = x;
-	dest_rect.y = y;
+	src_rect = { width * current_frame, height * (current_row - 1), width, height };
+	dest_rect = { x, y, width, height };
+	
 
 	SDL_RenderCopyEx(_renderer, _texture_map[id], &src_rect, &dest_rect, 0, 0, flip);
 	return false;
