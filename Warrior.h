@@ -11,7 +11,7 @@ public:
 	//different types of warriors. 
 	virtual void draw();
 	virtual void update(float dt);
-	virtual void clean();
+	virtual void clear();
 	
 public:
 	int m_currentRow;		//Current row in the sprite sheet
