@@ -8,10 +8,10 @@ Warrior::Warrior(Properties* props)
 	m_currentFrame = 0;
 	m_currentRow = 1;
 
-	m_frameCount = 10;
+	m_frameCount = 6;
 	m_rowCount = 1;
 	
-	m_animationSpeed = 120;
+	m_animationSpeed = 80;
 }
 
 void Warrior::draw()
@@ -24,7 +24,8 @@ void Warrior::update(float dt)
 	m_currentFrame = (SDL_GetTicks() / m_animationSpeed) % m_frameCount;
 }
 
-void Warrior::clean()
+
+void Warrior::clear()
 {
 	TextureManager::getInstance().clean();
 }
