@@ -3,22 +3,22 @@
 
 class Transform {
 public:
-	float x;
-	float y;
+	float m_X;
+	float m_Y;
 
 	//Constructor
-	Transform(float X = 0, float Y = 0) : x(X), y(Y) {}
+	Transform(float X = 0, float Y = 0) : m_X(X), m_Y(Y) {}
 
 	//Translate in X
-	void translateX(float x) { this->x += x; }
+	void translateX(float x) { this->m_X += x; }
 	//Translate in Y
-	void translateY(float y) { this->y += y; }
+	void translateY(float y) { this->m_Y += y; }
 	//Tranlate in X, Y
-	void translate(Vector2D v) { this->x += v.x, this->y += v.y; }
+	void translate(Vector2D v) { this->m_X += v.x, this->m_Y += v.y; }
 
 	//Show transformation
 	void printTransform() {
-		std::cout << "(" << x << "i + " << y << "j)" << std::endl;
+		std::cout << "(" << m_X << "i + " << m_Y << "j)" << std::endl;
 	}
 };
 
