@@ -41,9 +41,9 @@ void TextureManager::drop(std::string id)
 	std::cout << "Texture with id: " << id << " removed from texture map successfully..." << std::endl;
 }
 
-bool TextureManager::draw(std::string id, SDL_Renderer* _renderer, int x, int y, int width, int height, SDL_RendererFlip flip = SDL_FLIP_NONE)
+bool TextureManager::draw(std::string id, int x, int y, int width, int height, SDL_RendererFlip flip = SDL_FLIP_NONE)
 {
-	if (_renderer == NULL) {
+	if (Engine::getInstance().getRenderer() == NULL) {
 		std::cout << "Error empty renderer/renderer pointing to NULL passed...";
 		return false;
 	} else {
@@ -52,14 +52,14 @@ bool TextureManager::draw(std::string id, SDL_Renderer* _renderer, int x, int y,
 		SDL_Rect dest_rect = { x, y, width, height };
 
 		if (width == 0 && height == 0) {
-			if (SDL_RenderCopyEx(_renderer, _texture_map[id], NULL, NULL, 0, 0, flip) == 0) {
+			if (SDL_RenderCopyEx(Engine::getInstance().getRenderer(), _texture_map[id], NULL, NULL, 0, 0, flip) == 0) {
 				std::cout << "RenderCopyEx success..." << std::endl;
 				return true;
 			} else {
 				std::cout << "RenderCopyEx failed... String id: " << id << " Error: " << SDL_GetError() << std::endl;
 			}
 		} else {
-			if (SDL_RenderCopyEx(_renderer, _texture_map[id], &src_rect, &dest_rect, 0, 0, flip) >= 0) {
+			if (SDL_RenderCopyEx(Engine::getInstance().getRenderer(), _texture_map[id], &src_rect, &dest_rect, 0, 0, flip) >= 0) {
 				std::cout << "RenderCopyEx success..." << std::endl;
 				return true;
 			}
@@ -72,7 +72,7 @@ bool TextureManager::draw(std::string id, SDL_Renderer* _renderer, int x, int y,
 	}
 }
 
-bool TextureManager::draw_frame(std::string id, SDL_Renderer* _renderer, int x, int y, int width, int height, int current_frame, int current_row, SDL_RendererFlip flip)
+bool TextureManager::draw_frame(std::string id, int x, int y, int width, int height, int current_frame, int current_row, SDL_RendererFlip flip)
 {
 	SDL_Rect src_rect;
 	SDL_Rect dest_rect;
@@ -81,7 +81,7 @@ bool TextureManager::draw_frame(std::string id, SDL_Renderer* _renderer, int x, 
 	dest_rect = { x, y, width, height };
 	
 
-	SDL_RenderCopyEx(_renderer, _texture_map[id], &src_rect, &dest_rect, 0, 0, flip);
+	SDL_RenderCopyEx(Engine::getInstance().getRenderer(), _texture_map[id], &src_rect, &dest_rect, 0, 0, flip);
 	return false;
 }
 
