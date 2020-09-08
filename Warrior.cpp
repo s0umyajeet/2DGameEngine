@@ -11,7 +11,7 @@ Warrior::Warrior(Properties* props)
 	m_frameCount = 6;
 	m_rowCount = 1;
 	
-	m_animationSpeed = 80;
+	m_framesPerSecond = 80;
 }
 
 void Warrior::draw()
@@ -21,7 +21,7 @@ void Warrior::draw()
 
 void Warrior::update(float dt)
 {
-	m_currentFrame = (SDL_GetTicks() / m_animationSpeed) % m_frameCount;
+	m_currentFrame = (SDL_GetTicks() / m_framesPerSecond) % m_frameCount;
 }
 
 

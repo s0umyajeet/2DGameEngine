@@ -20,6 +20,6 @@ public:
 	int m_rowCount;		//Number of rows in the sprite sheet for this character
 	int m_frameCount;	//number of frames in the sprite sheet for this character
 
-	int m_animationSpeed;	//For controlling frames per second 
+	int m_framesPerSecond;	//For controlling frames per second 
 };
 
