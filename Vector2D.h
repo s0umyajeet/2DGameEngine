@@ -18,7 +18,10 @@ public:
 	inline Vector2D operator-(const Vector2D& v) {
 		return Vector2D(v.x - this->x, v.y - this->y);
 	}
-
+	
+	inline Vector2D operator*(const float scalar) {
+		return Vector2D(this->x * scalar, this->y * scalar);
+	}
 	void printVector() {
 		std::cout << "(" << x << "i + " << y << "j)" << std::endl;
 	}
