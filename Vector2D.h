@@ -7,7 +7,7 @@ public:
 	float y;
 
 	//constructor
-	Vector2D(int X = 0, int Y = 0) : x(X), y(Y) {}	
+	Vector2D(float X = 0, float Y = 0) : x(X), y(Y) {}	
 	
 	//+ operator overload
 	inline Vector2D operator+(const Vector2D& v) {
