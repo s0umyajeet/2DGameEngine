@@ -11,6 +11,7 @@ public:
 	void handleEvents();
 	inline bool isRunning() { return this->_is_running; }
 	void clean();
+	void Quit();
 
 private:
 	Engine();
