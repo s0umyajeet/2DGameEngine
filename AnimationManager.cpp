@@ -14,7 +14,7 @@ void AnimationManager::draw(float x, float y, int spriteWidth, int spriteHeight)
 	TextureManager::getInstance().draw_frame(m_textureID, x, y, spriteWidth, spriteHeight, m_currentSpriteFrame, m_currentSpriteRow, m_flip);
 }
 
-void AnimationManager::setProps(std::string textureID, int spriteRow, int frameCount, int framesPerSecond, SDL_RendererFlip flip = SDL_FLIP_NONE)
+void AnimationManager::setProps(std::string textureID, int spriteRow, int frameCount, int framesPerSecond, SDL_RendererFlip flip)
 {
 	m_textureID = textureID;
 	m_currentSpriteRow = spriteRow;
