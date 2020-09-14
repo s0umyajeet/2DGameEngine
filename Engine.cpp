@@ -110,10 +110,17 @@ void Engine::handleEvents()
 	}	
 }
 
+
 void Engine::clean()
 {
 	std::cout << "Cleaning game..." << std::endl;
 	SDL_DestroyWindow(_window);
 	SDL_DestroyRenderer(_renderer);
 	SDL_Quit();
+}
+
+void Engine::Quit() {
+	std::cout << "Shutting down engine..." << std::endl;
+	_is_running = false;
+	Engine::clean();
 }
