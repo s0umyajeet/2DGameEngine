@@ -91,7 +91,7 @@ void Engine::render()
 	//clear the renderer
 	SDL_RenderClear(_renderer);
 	//draw to the screen
-	TextureManager::getInstance().draw("awesome_face", _renderer, 0, 0, 0, 0, SDL_FLIP_NONE);
+	TextureManager::getInstance().draw("awesome_face", 0, 0, 0, 0, SDL_FLIP_NONE);
 	//SDL_RenderCopy(_renderer, _texture, &_source_rect, NULL);
 	SDL_RenderPresent(_renderer);
 
