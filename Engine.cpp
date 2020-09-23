@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Engine.h"
+#include "Timer.h"
 
 
 Engine::Engine() { 
@@ -75,11 +76,6 @@ bool Engine::init(const char* title, int x_pos, int y_pos, int width, int height
 
 void Engine::update() 
 {
-	//int frames = 6;
-	//int delay_per_frame = 80;    //ms;
-	//int current_frame = (SDL_GetTicks() / delay_per_frame) % frames;
-
-	//_source_rect.x = _source_rect.w * current_frame;
 }
 
 

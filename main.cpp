@@ -2,6 +2,7 @@
 #include <string>
 #include "SDL.h"
 #include "Engine.h"
+#include "Timer.h"
 
 
 int main(int argc, char* argv[]) {
@@ -14,6 +15,7 @@ int main(int argc, char* argv[]) {
 		Engine::getInstance().handleEvents();
 		Engine::getInstance().update();
 		Engine::getInstance().render();
+		Timer::getInstance().Tick();
 	} 
 
 	Engine::getInstance().clean();
