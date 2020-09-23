@@ -1,9 +1,6 @@
 #include <iostream>
 #include "Engine.h"
-#include <string>
-#include <Windows.h>
-#include <SDL_image.h>
-#include "TextureManager.h"
+
 
 Engine::Engine() { 
 	_is_running	= true; 
@@ -99,15 +96,7 @@ void Engine::render()
 
 void Engine::handleEvents()
 {
-	SDL_Event event;
-	while (SDL_PollEvent(&event)) {
-		switch (event.type) {
-		case SDL_QUIT:
-			_is_running = false;
-			break;
-			default: break;
-		}
-	}	
+	EventHandler::getInstance().listen();
 }
 
 

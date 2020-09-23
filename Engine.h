@@ -1,5 +1,10 @@
 #pragma once
 #include "SDL.h"
+#include <string>
+#include <Windows.h>
+#include <SDL_image.h>
+#include "TextureManager.h"
+#include "EventHandler.h"
  
 class Engine {
 public:
