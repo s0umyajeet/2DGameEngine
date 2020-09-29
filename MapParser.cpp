@@ -7,14 +7,50 @@ bool MapParser::load()
 	return Parse("level 1", ""); 
 }
 
-GameMap* MapParser::getMaps()
+GameMap* MapParser::getMaps(std::string mapID) 
 {
-	return nullptr;
+	return gameMapDict[mapID];
 }
 
 bool MapParser::Parse(std::string mapID, std::string source)
 {
-	return false;
+	TiXmlDocument xml;
+	xml.LoadFile(source);
+
+	if (xml.Error()) {
+		std::cerr << "Failed to load the source [" << source << "] " << std::endl;
+		return false;
+	}
+
+	//if everything is alright
+	TiXmlElement* root = xml.RootElement();
+	int rowCount, colCount, tileSize = 0;
+	
+	//add xml elements later REMEMBER!!!!!
+	root->Attribute("...", &colCount);
+	root->Attribute("...", &rowCount);
+	root->Attribute("...", &tileSize);
+
+	//parse all tilesets
+
+	std::vector<Tileset> tileSetVecTemp;
+
+	for (auto e = root->FirstChildElement(); e != NULL; e = (TiXmlElement*)e->NextSibling()) {
+		if (e->Value() == "tileset") {
+			tileSetVecTemp.push_back(parseTileset(e));
+		}
+	}
+
+	GameMap* tempGameMap = new GameMap();
+	for (auto e = root->FirstChildElement(); e != NULL; e = (TiXmlElement*)e->NextSibling()) {
+		if (e->Value() == "Layer") {
+			TileLayer* tempTileLayer = parseTileMap(e, tileSetVecTemp, tileSize, rowCount, colCount);
+			tempGameMap->getLayers().push_back(tempTileLayer);
+		}
+	}
+
+	gameMapDict[mapID] = tempGameMap;
+	return true;	
 }
 
 Tileset MapParser::parseTileset(TiXmlElement* XMLTilesetElem)
@@ -41,7 +77,7 @@ TileLayer* MapParser::parseTileMap(TiXmlElement* XMLTileLayerElem, std::vector<T
 	TiXmlElement* data;
 	for (auto x = XMLTileLayerElem->FirstChild(); x != NULL; x = x->NextSibling()) {
 		if (x->Value() == "data") {
-			data = x;
+			data = (TiXmlElement*) x;
 			break;
 		}
 	}

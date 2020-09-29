@@ -17,7 +17,7 @@ public:
 	}
 
 	bool load();
-	GameMap* getMaps();
+	GameMap* getMaps(std::string mapID);
 
 private:
 	//parse master function
@@ -28,7 +28,7 @@ private:
 	
 	//Parse Tile layers (layers of the map)
 	//We return TileLayer* because it is going to be
-	//stored in a vector<Layer*>
+	//stored in a vector<Layer*> (GameMap.h)
 	TileLayer* parseTileMap(TiXmlElement* XMLTileLayerElem, 
 				std::vector<Tileset> Tilesets,
 		                int tileSize, int numRows, int numCols);
