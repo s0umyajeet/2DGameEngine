@@ -1,6 +1,5 @@
 #include <iostream>
 #include "Engine.h"
-#include "Timer.h"
 
 
 Engine::Engine() { 
@@ -67,6 +66,12 @@ bool Engine::init(const char* title, int x_pos, int y_pos, int width, int height
 		return false;
 	}
 
+	if (MapParser::getInstance().load() == false) {
+		std::cout << "Error loading map" << std::endl;
+		return false;
+	}
+	
+	_gameMap = MapParser::getInstance().getMap("level_1");
 	std::cout << "Init successful..." << std::endl;
 	//Everything initialized successully, start the main loop
 	_is_running = true;    
@@ -84,7 +89,9 @@ void Engine::render()
 	//clear the renderer
 	SDL_RenderClear(_renderer);
 	//draw to the screen
-	TextureManager::getInstance().draw("awesome_face", 0, 0, 0, 0, SDL_FLIP_NONE);
+	SDL_SetRenderDrawColor(_renderer, 124, 218, 254, 255);
+	//TextureManager::getInstance().draw("awesome_face", 0, 0, 0, 0, SDL_FLIP_NONE);
+	_gameMap->Render();
 	//SDL_RenderCopy(_renderer, _texture, &_source_rect, NULL);
 	SDL_RenderPresent(_renderer);
 

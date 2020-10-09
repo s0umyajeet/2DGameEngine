@@ -34,6 +34,10 @@ class TileLayer : public Layer
 public:
 	virtual void Render();
 	virtual void Update();
+	std::vector<Tileset>* getTilesets() { return &TilesetVec; }
+	TileLayer(int tileSize, int numRows, int numCols,
+		std::vector<std::vector<int>> tilemap, std::vector<Tileset> tilesets);
+
 private:
 	//number of rows and columns in the layer
 	int numRows;

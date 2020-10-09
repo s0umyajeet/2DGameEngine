@@ -6,10 +6,10 @@
 class GameMap {
 public:
 	GameMap() = default;
-	void Render() { for (auto x : Layers) x->Render(); }
-	void Update() { for (auto x : Layers) x->Update;   }
-	inline std::vector<Layer*> getLayers() { return this->Layers; }
+	virtual void Render() { for (auto &x : Layers) x->Render(); }
+	virtual void Update() { for (auto &x : Layers) x->Update(); }
+	//inline std::vector<Layer*> getLayers() { return this->Layers; }
 
-private:
+public:
 	std::vector<Layer*> Layers;
 };

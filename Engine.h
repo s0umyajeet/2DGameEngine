@@ -5,6 +5,8 @@
 #include <SDL_image.h>
 #include "TextureManager.h"
 #include "EventHandler.h"
+#include "MapParser.h"
+#include "Timer.h"
  
 class Engine {
 public:
@@ -28,6 +30,7 @@ private:
 	SDL_Renderer*	_renderer;
 	SDL_Rect        _source_rect;
 	SDL_Rect        _dest_rect;
+	GameMap*	_gameMap;
 	bool		_is_running;
 
 };

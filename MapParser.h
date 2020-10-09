@@ -17,7 +17,7 @@ public:
 	}
 
 	bool load();
-	GameMap* getMaps(std::string mapID);
+	GameMap* getMap(std::string mapID);
 
 private:
 	//parse master function
@@ -35,7 +35,7 @@ private:
 
 private:
 	//singleton
-	MapParser();
+	MapParser() = default;
 
 	//move to GameMap class ???
 	std::map<std::string, GameMap*> gameMapDict;
