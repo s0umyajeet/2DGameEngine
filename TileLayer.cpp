@@ -34,10 +34,11 @@ void TileLayer::Render()
 						//index found
 						index = k;
 
-						tileID = tileID + TilesetVec[k].tileCount - TilesetVec[k].endID;
 						//todo: simplify formula
-						//check if this works!?
-						//tileID -= TilesetVec[k].startID;
+						//tileID = tileID + TilesetVec[k].tileCount - TilesetVec[k].endID;
+						
+						//check if this works!? (yep works!)
+						tileID -= TilesetVec[k].startID - 1;
 						break;
 					}
 				}
@@ -45,13 +46,14 @@ void TileLayer::Render()
 
 			Tileset ts = TilesetVec[index];
 			//pinpointing the tile in the tileset
-			int tileInRow = tileID / ts.numCols;
-			int tileInCol = tileID - tileInRow * ts.numCols - 1;
+			
+			int tileInRow = tileID / ts.numCols + 1;
+			int tileInCol = tileID - (tileInRow - 1) * ts.numCols;
 
 			//corner case of last col
 			if (tileID % ts.numCols == 0) {
 				tileInRow--;
-				tileInCol = ts.numCols - 1;
+				tileInCol = ts.numCols;
 			}
 
 			TextureManager::getInstance().draw_tile(ts.name,

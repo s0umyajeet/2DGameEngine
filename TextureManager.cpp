@@ -85,10 +85,10 @@ bool TextureManager::draw_frame(std::string id, int x, int y, int width, int hei
 	return false;
 }
 
-bool TextureManager::draw_tile(std::string id, int x, int y, int tilesize, int current_frame, int current_row, SDL_RendererFlip flip)
+bool TextureManager::draw_tile(std::string id, int x, int y, int tilesize, int row, int col, SDL_RendererFlip flip)
 {
 	SDL_Rect dstRect = { x, y, tilesize, tilesize };
-	SDL_Rect srcRect = { tilesize * current_frame, tilesize * (current_row - 1), tilesize, tilesize };
+	SDL_Rect srcRect = { tilesize * (col - 1), tilesize * (row - 1), tilesize, tilesize };
 	SDL_RenderCopyEx(Engine::getInstance().getRenderer(), _texture_map[id], &srcRect, &dstRect, 0, NULL, flip);
 	return false;
 }

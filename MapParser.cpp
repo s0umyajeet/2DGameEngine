@@ -3,7 +3,7 @@
 
 bool MapParser::load()
 {
-	return Parse("level_1", "assets/maps/level_1.tmx"); 
+	return Parse("level_2", "assets/maps/level_2.tmx"); 
 } 
 
 GameMap* MapParser::getMap(std::string mapID) 
@@ -31,8 +31,8 @@ bool MapParser::Parse(std::string mapID, std::string source)
 	int rowCount, colCount, tileSize = 0;
 	
 	//add xml elements later REMEMBER!!!!!
-	root->Attribute("height", &colCount);
-	root->Attribute("width", &rowCount);
+	root->Attribute("height", &rowCount);
+	root->Attribute("width", &colCount);
 	root->Attribute("tileWidth", &tileSize);
 
 	//parse all tilesets
