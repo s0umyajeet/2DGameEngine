@@ -8,7 +8,7 @@
 int main(int argc, char* argv[]) {
 	bool fullscreen = false;
 	
-	Engine::getInstance().init("Game 1", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 480, 480, fullscreen);
+	Engine::getInstance().init("Game 1", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 960, 640, fullscreen);
 
 	while (Engine::getInstance().isRunning()) 
 	{
